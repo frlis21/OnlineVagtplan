@@ -1,0 +1,81 @@
+\documentclass{report}
+
+\usepackage{xltabular}
+\usepackage{fontawesome5}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{minted}
+\usepackage{chngcntr}
+\usepackage{tikz}
+\usepackage{pgf-umlsd}
+\usepackage{pgf-umlcd}
+\usepackage{plantuml}
+\usepackage{bookmark}
+\usepackage{pdfpages}
+
+\usetikzlibrary{shapes}
+
+\counterwithin*{figure}{chapter}
+\renewcommand{\thefigure}{\arabic{chapter}-\arabic{figure}}
+\renewcommand{\thetable}{\arabic{chapter}-\arabic{table}}
+\renewcommand{\thechapter}{\arabic{chapter}:}
+\renewcommand{\chaptername}{Part}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue
+}
+
+\title{OnlineVagtplan}
+\author{
+	Frederik List \\
+	\small frlis21@student.sdu.dk \\
+	\small Exam nr.\ 182291621
+}
+
+\begin{document}
+
+\maketitle
+
+\chapter*{Abstract}
+
+In this report I outline how planned and implemented a prototype of the \textsc{OnlineVagtplan}
+software to be used by \textsc{LocalCinema}.
+The reader may view the source for the MVP on \textsc{GitHub} here:
+\begin{center}
+	\url{https://github.com/frlis21/OnlineVagtplan}
+\end{center}
+and the MVP itself here:
+\begin{center}
+	\url{https://frlis21.github.io/OnlineVagtplan/}
+\end{center}
+Read the \texttt{README.md} file for more information
+on how to build and test the software yourself.
+
+\include{part1}
+
+\include{part2}
+
+\chapter*{Conclusion}
+
+In the author's unqualified opinion,
+pulling out all of the stops for developing such a small piece of software
+was very much overkill. That is all!
+
+\appendix
+
+\include{interview}
+
+\chapter{Test Coverage}
+\begin{figure}[h]
+	\label{appendix:coverage}
+	\includegraphics*[width=\textwidth,trim= 0 8in 0 0]{coverage.pdf}
+\end{figure}
+
+\chapter{OpenAPI Specification}
+
+\label{openapi}
+\inputminted{yaml}{../openapi.yml}
+
+\end{document}

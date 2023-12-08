@@ -1,0 +1,17 @@
+\begin{figure}
+	\centering
+	\begin{sequencediagram}
+		\newthread{volunteer}{Volunteer}
+		\newinst[1.5]{app}{:App}
+		\newinst[2]{portal}{:Portal}
+		\newinst[1]{store}{:Store}
+		
+		\begin{call}{volunteer}{First time visit}{app}{Login page}
+			\begin{call}{app}{showRegistration()}{portal}{Login page}
+			\begin{call}{portal}{register()}{store}{success}
+			\end{call}
+			\end{call}
+		\end{call}
+	\end{sequencediagram}
+	\caption{Create user}
+\end{figure}

@@ -1,0 +1,154 @@
+\chapter{Annotated interview}
+\label{appendix:interview}
+
+\begingroup
+
+\newcommand{\dialogue}[3]{%
+	\scshape\footnotesize #1 \rule{0pt}{3ex} \\*%
+	\setlength{\parskip}{4pt}%
+	#2 & \itshape #3}
+
+\noindent\begin{longtable}[l]{p{0.7\linewidth}p{0.3\linewidth}}
+	\toprule
+	\endfirsthead
+	\midrule
+	\endhead
+	\midrule
+	\endfoot
+	\bottomrule
+	\endlastfoot
+
+	\dialogue{Consultant}{%
+		Hello \textsc{Chairman}.
+		I'm glad you had some time to talk to me today.
+		Can you share some of the background and history of \textsc{LocalCinema}?
+	}{}
+	\\
+	\dialogue{Chairman}{%
+		Of course.
+		It is my pleasure.
+		In the last 30 years, this cinema has existed in this city.
+		But, due to some unfortunate financial events 5 years ago the former owner had to step back and close the cinema.
+		The community in the city felt it was important to get the cinema to open again.
+		This was why they decided to start this association with the sole purpose of operating the local cinema voluntarily without any paid employees.
+
+		The association has now been operating the cinema since the founding and we still experience a rise in the number of volunteers and paying visitors.
+		We are however also seeing the same volunteers taking shifts, again and again, making them spend quite a lot of their spare time on this work.
+		We would like to get more members to volunteer for a shift
+		and we hope by making this accessible to the members online that it will lower the bar sufficiently to achieve this.
+	}{}
+	\\
+	\dialogue{Consultant}{%
+		Who signs up as members of \textsc{LocalCinema}?
+	}{}
+	\\
+	\dialogue{Chairman}{%
+		A quite diverse group to be honest.
+		\textbf{Generally speaking, the average member is more than 35 years old.}
+		\textbf{Unfortunately, not all members own a computer at home.}
+
+		Some of our members function as facility service making sure the building is not in decay.
+		The background of these is often as carpenters, structural engineers or similar.
+		We also have salespeople manning the ticket stand and candy stand.
+		They don't share a common background other than being quite talkative and extrovert.
+		We also have some technical staff taking care of operating the projector and sound equipment.
+		The cleaners are also volunteers.
+		I have tried to convince them to clean my house as well, but so far no luck.
+		The PR group has the responsibility to create decorations for our windows and function as event planners for larger events as well.
+	}{%
+		This group is not very tech-savvy, so a simple UX is a priority.
+		They probably at least own a phone so an app would be most convenient.
+	}
+	\\
+	\dialogue{Consultant}{%
+		Can anybody become a member?
+	}{}
+	\\
+	\dialogue{Chairman}{%
+		Yes as long as you are willing to help voluntarily.
+		We prefer if our members are older than 18 years.
+		\textbf{All members are in one or more groups.}
+		Nothing is stopping you from being both in the group managing the tickets and the cleaning group.
+		\textbf{A side-effect of this is that the groups are tightly knitted together.}
+	}{So communication happens by a third party such as group SMS.}
+	\\
+	\dialogue{Consultant}{%
+		Can you tell me how you enlist for a shift currently?
+	}{}
+	\\
+	\dialogue{Chairman}{%
+		We currently have lists hanging in the cinema where people then write their names on the individual shows.
+		The problem is people sometimes forget about their shifts and then we might end up without anybody to start the movie or sell tickets.
+		This doesn't happen that often, but it has happened previously.
+		Some members also state it is a blocker for them that they need to go to the cinema to enlist for a shift, resulting in they never take a shift.
+		I truly believe we could get a lot more volunteers with more buy-in from the members if they could easily enlist for shifts.
+	}{}
+	\\
+	\dialogue{Consultant}{%
+		What do you do if not all shifts are taken by members?
+	}{}
+	\\
+
+	\dialogue{Chairman}{%
+		\textbf{If that happens we have the aptly called Supers.}
+		They make sure all shifts are filled.
+		What they often do is to look forward in time and call around if a shift is still empty.
+		Some of these Supers have been spending a lot of time on this.
+		Another problem is they physically need to go to the cinema to check the lists.
+		If they can't find a volunteer to that shift, then they need to man it themselves
+		which is of course not sustainable.
+
+		By the way, people get tickets for the shows every half year depending on the number of shifts they have had.
+		This is a small incentive to motivate people.
+		They get one ticket per 5 shifts they have had.
+		It is the job of the Supers to distribute these tickets and keep a ledger on how many shifts each member have had.
+		\textbf{It would be nice if the system could keep track of this on its own.}
+		Again, this would free up a lot of time for the Supers.
+	}{Supers $=$ Team leaders.}
+	\\
+	\dialogue{Consultant}{%
+		Let's say a volunteer gets sick, how do they notify the Supers? What if you just want to cancel a shift?
+	}{}
+	\\
+	\dialogue{Chairman}{%
+		You can only do this by contacting a Super directly.
+		\textbf{This can be cumbersome because people need to figure out who is the Super on call at the moment.}
+		\textbf{We don't like to see people canceling their shifts less than a week before the show,}
+		simply because we can't find a replacement within such a short time.
+	}{%
+		When a shift is canceled, the Supers and volunteers need to be notified.
+	}
+	\\
+	\dialogue{Consultant}{%
+		Who are the Supers and how do you become one?
+	}{}
+	\\
+	\dialogue{Chairman}{%
+		The Supers are members of the groups that are up for an extra challenge.
+		Each group has 3 to 6 Supers.
+		A Super is on call for 2 weeks at the time.
+		\textbf{You need to be in the group for at least one year and have had more than 30 shifts before you can come into consideration as a Super.}
+		{So per-volunteer stats need to be tracked.}
+	}{}
+	\\
+	\dialogue{Consultant}{%
+		How do you know which movies are currently playing in the cinema?
+	}{}
+	\\
+	\dialogue{Chairman}{%
+		We have an electronic ticketing system with all the shows listed.
+		Our website pulls the data from that system directly.
+		\textbf{It would be nice if the OnlineVagtplan can import the data automatically as well.}
+		This would avoid a lot of double bookkeeping.
+	}{}
+	\\
+	\dialogue{Consultant}{%
+		I think I'm starting to have an idea of what we need to focus on.
+		I'll take these inputs home and try to come up with a solution.
+		I'll create a writeup and send it to you if you want.
+		If you think of anything we forgot to talk about just reach out me and we can get it documented.
+		I might also have some clarifying questions I would like to ask you at some point.
+	}{}
+\end{longtable}
+
+\endgroup

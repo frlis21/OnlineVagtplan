@@ -1,0 +1,262 @@
+\chapter{Preparing our process}
+
+First we will reiterate the information gathered at the interview with the chairman
+along with new information acquired during follow-up questions
+so that all of our assumptions are in place.
+An annotated version of the original interview can be found in the \hyperref[appendix:interview]{appendix}.
+
+\begin{itemize}
+	\item \textsc{LocalCinema} is a medium-sized establishment
+	      with 6 viewing rooms and enough showings
+	      such that the ticket counter and candy stand need to be continously manned.
+	      Cleaners will also mostly be continuously engaged.
+
+	\item The cinema is open from 16:00 to 22:00
+	      every weekday except Monday and Tuesday
+	      and of course holidays.
+
+	\item 1 shift is the full 6 hours the cinema is open.
+
+	\item Showings are within stretches of 15-minute blocks.
+	      There are always at least 30 minutes
+	      between the end of a movie and the next showing
+	      to allow for cleaning.
+
+	\item The volunteers are currently divided into the following teams:
+
+	      \begingroup
+	      \begin{tabularx}{0.9\linewidth}{p{8em}X}
+		      \bfseries\raggedleft Cleaners                      &
+		      Clean viewing rooms and bathrooms after a viewing.
+		      At least 5 cleaners is nice to have, more is better.
+		      \\
+		      \bfseries\raggedleft Salespeople                   &
+		      Man the ticket counter and candy stand.
+		      Between 3 and 6 salespeople are preffered.
+		      \\
+		      \bfseries\raggedleft Planning and public relations &
+		      Plan showings, events, and decoration of cinema
+		      at predetermined meetings.
+		      \\
+		      \bfseries\raggedleft Facilities services           &
+		      General handypeople, keep the building tidy
+		      and repair anything gone to disrepair.
+		      Only 1 or 2 are required per shift.
+		      \\
+		      \bfseries\raggedleft Technicians                   &
+		      Man the projectors and other necessary equipment for a showing.
+		      Only 1 is required per shift.
+		      \\
+		      \bfseries\raggedleft IT                            &
+		      Small team operating on-demand,
+		      responding to operational errors in the ticketing system
+		      and other \textsc{LocalCinema} IT systems.
+	      \end{tabularx}
+	      \endgroup
+
+	\item Supers are team leaders, with 3--6 supers per team.
+	      Supers are in charge of teams in 2-week shifts;
+	      customarily the supers in each team take turns with shifts,
+	      but this is not always convenient for all Supers
+	      so Supers agree off-hand who takes what shifts.
+
+	\item Supers call role to make sure volunteers actually show up for shifts.
+
+	\item Communications take place off-platform.
+	      This could for example be by e-mail, group SMS,
+	      a third-party application such as \textsc{GroupMe},
+	      and so on.
+
+	\item Most volunteers are at least 35 years old,
+	      that is, they are mainly stay-at-home parents with schoolchildren or retired.
+	      There are, however, some some active younger volunteers from the local high school
+	      serving out their volunteer hours for some club participation requirements.
+
+	\item \textsc{LocalCinema}'s ticketing system
+	      provides an API for fetching showings.
+\end{itemize}
+
+\section*{Stakeholders}
+
+Here we provide a classification of some stakeholders of the project
+according to the salience model
+along with a short description of each.
+We do not analyze all stakeholders for the project here
+because there are many that are unimportant.
+
+\medskip
+
+\begingroup
+\renewcommand{\arraystretch}{1.1}
+\renewcommand{\multirowsetup}{\raggedleft\bfseries}
+\noindent\begin{tabularx}{\linewidth}{p{8em}X}
+	\toprule
+	\multirow[t]{2}{=}{Supers}
+	 & \scshape definitive $\cdot$ core
+	\\ &
+	The Supers are our primary stakeholders
+	as the goal of the project is to make their jobs easier.
+	\\ \midrule
+	\multirow[t]{2}{=}{Volunteers}
+	 & \scshape expectant $\cdot$ dependent
+	\\ &
+	Another goal of the project is
+	to make it easier for volunteers to sign up for shifts,
+	but ultimately it is the Supers that decide what goes.
+	\\ \midrule
+	\multirow[t]{2}{=}{Authorities}
+	 & \scshape latent $\cdot$ dormant
+	\\ &
+	There may be some government regulations we need to follow
+	as volunteers will be creating accounts
+	which we need to store data for.
+	\\ \midrule
+	\multirow[t]{2}{=}{Volunteer organizations}
+	 & \scshape latent $\cdot$ discretionary
+	\\ &
+	Besides the \textsc{LocalCinema} association,
+	other volunteer organizations may have a stake in this project
+	as many parts of the project can be reused for shift scheduling elsewhere.
+	It could be beneficial to build a generic shift scheduler
+	in such a way that the benefits of a highly specialized solution are retained.%
+	%\footnote{To expand upon this idea,
+	%	consider the to-do list app \href{https://trello.com/}{\textsc{Trello}}.
+	%	Assuming there are, say, less than 50 volunteers maintaining \textsc{LocalCinema},
+	%	an acceptable scheduling solution requiring minimal training could be procured
+	%	using \textsc{Trello}'s premium automation features and possibly a Python script
+	%	(which could feasibly be procured by \textsc{LocalCinema}'s IT team).
+	%	This is a generic solution with problems
+	%	that a specialized solution solves.}
+	\\ \midrule
+	\multirow[t]{2}{=}{Infrastructure hosts}
+	 & \scshape latent $\cdot$ dormant
+	\\ &
+	To reduce costs,
+	\textsc{OnlineVagtplan} will likely be deployed with cloud service providers
+	which frequently have policies and terms that need to be followed.
+	\\ \midrule
+	\multirow[t]{2}{=}{Cybercriminals}
+	 & \scshape expectant $\cdot$ dangerous
+	\\ &
+	\textsc{OnlineVagtplan} needs to be secure from cybercriminals.
+	\\ \bottomrule
+\end{tabularx}
+\endgroup
+
+\section*{Users}
+
+\begin{itemize}
+	\item \textbf{Volunteers} are our end users;
+	      they will be using \textsc{OnlineVagtplan}
+	      to view and sign up for shifts.
+	      As the chairman said,
+	      volunteers are mainly stay-at-home parents with children going to school or retired,
+	      so most volunteers are at least 35 years old
+	      with some high school students in the mix.
+
+	\item \textbf{Supers} are super users;
+	      they need extra functionality to do their jobs effectively.
+	      They moderate the volunteers and keep them updated,
+	      and they need to be kept up-to-speed while they are on call.
+
+	\item The \textbf{IT team} are also super users;
+	      they are the tech wizards that will be interacting directly with the system
+	      to support users and mitigate cyber-attacks.
+
+	\item The \textbf{mobile app} developed by a third-party is a system user,
+	      and so is the website \textbf{frontend} developed by us;
+	      they will be using \textsc{OnlineVagtplan}'s API
+	      to interact with the system.
+
+	\item \textsc{LocalCinema}'s \textbf{ticketing system}
+	      could be considered a system user for providing \textsc{OnlineVagtplan}
+	      with the necessary data for shift scheduling.
+\end{itemize}
+
+\section*{Backlog}
+
+%\renewcommand{\arraystretch}{1.1}
+
+%\newcommand{\starsno}{\faStar[regular]\faStar[regular]\faStar[regular]}
+%\newcommand{\starsi}{\faStarHalf*\faStar[regular]\faStar[regular]}
+%\newcommand{\starsii}{\faStar\faStar[regular]\faStar[regular]}
+%\newcommand{\starsiii}{\faStar\faStarHalf*\faStar[regular]}
+%\newcommand{\starsiv}{\faStar\faStar\faStar[regular]}
+%\newcommand{\starsv}{\faStar\faStar\faStarHalf*}
+%\newcommand{\starsvi}{\faStar\faStar\faStar}
+
+\newlength{\cookieslen}
+\newcommand{\cookiesvi}{\makebox[\width][l]{\faCookie\,\faCookie\,\faCookie}}
+\settowidth{\cookieslen}{\cookiesvi}
+\newcommand{\cookiesi}{\makebox[\cookieslen][l]{\faCookieBite}}
+\newcommand{\cookiesii}{\makebox[\cookieslen][l]{\faCookie}}
+\newcommand{\cookiesiii}{\makebox[\cookieslen][l]{\faCookie\,\faCookieBite}}
+\newcommand{\cookiesiv}{\makebox[\cookieslen][l]{\faCookie\,\faCookie}}
+\newcommand{\cookiesv}{\makebox[\cookieslen][l]{\faCookie\,\faCookie\,\faCookieBite}}
+
+Requirements analysis essentially consisted of the author asking himself
+``If I were an $X$, what would I want out of \textsc{OnlineVagtplan}?''
+where $X$ is a user group for all user groups outlined above.
+From this, a long list of features in the form of user stories was created for each user group.
+
+In celebration of the holidays,
+the author has assigned to each of these features
+some amount of cookies you get upon completion of the feature
+from \faCookieBite\ (half a cookie) to \cookiesvi\ (three full cookies)
+where you get more cookies the more important a feature is.
+Then you get the most cookies by completing system-critical features.
+
+A weight is given to each feature
+from a subsequence of the almost-fibonacci numbers \[(1, 2, 3, 5, 10, 20).\]
+This weight is calculated purely from intuition
+and is a rough estimate of the difficulty
+and amount of work needed to implement the feature.
+
+Finally, each feature is assigned a short name
+and each user story is categorized into epics
+for easier referencing.
+Note that some epics and feature names are associated with several user groups.
+
+\input{backlog}
+
+This would ideally be the backlog for the complete product,
+but there are more than likely some items missing
+which will be discovered during the course of development.
+This backlog has a combined weight of 180,
+but we will only be creating the MVP for this sprint.
+For this, these selected features from selected epics
+will be implemented:
+\begin{center}
+	\begin{tabular}{lll}
+		\textbf{Account} & \textbf{Shifts} & \textbf{Teams} \\
+		\midrule
+		Signup           & Take            & Join           \\
+		Login            & Cancel          &                \\
+		                 & Status
+	\end{tabular}
+\end{center}
+for a combined weight of 13.
+That is, the MVP is $13/180^{\mathrm{ths}} \approx 7\%$ of our product
+according to our full backlog.
+
+\subsection*{But why}
+
+The backlog is structured as it is
+because (user) stories are a super nice and simple way
+of communicating system requirements.
+Any fool can infer ``sub-requirements'' for features described by a story,
+especially if said fool is the only one working on the project
+(as in this case).
+
+There are six priority levels
+mainly because three is too little,
+but it is also a nice number of cookies to have,
+so each priority level is half of a cookie.
+Six levels is also a nice balance
+between coarse and granular prioritization.
+
+Features are assigned a weight
+mainly for fun so the author can feel like he is getting work done
+when he completes a feature.
+They can also be used to calculate approximately how ``done''
+the product is, as was done above.

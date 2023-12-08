@@ -1,0 +1,22 @@
+\begin{figure}[h]
+	\centering
+	\begin{sequencediagram}
+		\newthread{volunteer}{Volunteer}
+		\newinst[1.8]{ui}{:App}
+		\newinst[1.2]{shifts}{:Shifts}
+		\newinst[1.2]{store}{:Store}
+		
+		\begin{call}{volunteer}{Go to shifts}{ui}{Available shifts}
+			\begin{call}{ui}{showShifts()}{shifts}{listShifts()}
+			\begin{call}{shifts}{getShifts()}{store}{shifts}
+			\end{call}
+			\end{call}
+		\end{call}
+
+		\begin{call}{volunteer}{Select shift}{ui}{Confirmation}
+			\begin{call}{ui}{takeShift()}{store}{success}
+			\end{call}
+		\end{call}
+	\end{sequencediagram}
+	\caption{Take shift}
+\end{figure}

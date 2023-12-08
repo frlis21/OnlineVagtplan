@@ -1,0 +1,243 @@
+openapi: 3.0.3
+info:
+  title: OnlineVagtplan REST API
+  description: Yep!
+  version: "0.42"
+servers:
+  - url: https://onlinevagtplan.localcinema.org/api/v1
+paths:
+  /users:
+    get:
+      tags:
+        - users
+      summary: List users
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+  /users/{name}:
+    get:
+      tags:
+        - users
+      summary: Get user info
+      description: "Not very useful because users don't have much data..."
+      parameters:
+        - name: name
+          in: path
+          description: Name of user
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: User does not exist
+
+  /shifts:
+    get:
+      tags:
+        - shifts
+      summary: Get list of shifts
+      description: "Retrieves shifts by showing `id`'s."
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  20:
+                    "billy42": "cleaner"
+                    "jimmy7": "technician"
+                  21:
+                    "billy42": "cleaner"
+                    "jimmy7": "technician"
+                additionalProperties:
+                  $ref: "#/components/schemas/Shift"
+  /shifts/{name}:
+    get:
+      tags:
+        - shifts
+      summary: Get shifts by user
+      parameters:
+        - name: name
+          in: path
+          description: The name of the user
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Shift"
+  /shifts/{name}/{id}:
+    put:
+      tags:
+        - shifts
+      summary: Create or modify shift
+      parameters:
+        - name: name
+          in: path
+          description: Name of user
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: "Showing `id`"
+          required: true
+          schema:
+            type: string
+        - name: job
+          in: query
+          description: Shift job
+          required: true
+          schema:
+            $ref: "#/components/schemas/Job"
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+        - shifts
+      summary: Cancel shift
+      parameters:
+        - name: name
+          in: path
+          description: Name of user
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: "Showing `id`"
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Shift did not exist to begin with
+  /showings:
+    get:
+      tags:
+        - showings
+      summary: List showings
+      description: "Retrieve showings by showing `id`."
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: "#/components/schemas/Showing"
+                example:
+                  20:
+                    date: 10/10/2024
+                    movies:
+                      - title: Kill Bill
+                        duration: 5194
+                      - title: Pulp Fiction
+                        duration: 5432
+  /showings/{id}:
+    get:
+      tags:
+        - showings
+      summary: Get showing information
+      parameters:
+        - name: id
+          in: path
+          description: "`id` of the show"
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Showing"
+        "404":
+          description: Showing does not exist
+
+components:
+  schemas:
+    Job:
+      type: string
+      enum:
+        - cleaner
+        - handyperson
+        - technician
+        - salesperson
+
+    User:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          example: billy42
+
+    Shift:
+      required:
+        - name
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/Job"
+      example:
+        20: "cleaner"
+        21: "technician"
+
+    Showing:
+      type: object
+      required:
+        - date
+        - movies
+      properties:
+        date:
+          type: string
+          format: date
+          example: "11/09/2025"
+        movies:
+          type: array
+          minItems: 6
+          maxItems: 6
+          items:
+            type: array
+            items:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Kill Bill
+                duration:
+                  type: integer
+                  example: 5194
+
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: query
+
+security:
+  - api_key: []

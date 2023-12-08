@@ -1,0 +1,191 @@
+\chapter{Making our first product delivery}
+
+\section*{Flows in the system}
+
+Object oriented programming sucks.
+That is why it was decided to build the product
+with the more functional component composition paradigm.
+Consequently, these UML diagrams are a little more abstract
+than they would be diagramming for object-oriented software.
+
+\input{take-shift-uml}
+
+\input{create-user-uml}
+
+\input{classes-uml}
+
+\section*{API}
+
+The OpenAPI specification file can be found in the
+\hyperref[openapi]{appendix}.
+The specification tries to follow industry ``best practices''
+such as using all of the HTTP verbs
+and having endpoints be plural nouns.
+This already goes a long way to reaching level 2
+in the Richardson maturity scale.
+Otherwise the API tries to follow
+how a relational database might store the data
+and tries to minimize duplicate data retrieval.
+Finally, as a last rule of thumb,
+paths were kept shorter rather than longer.
+
+Some notes:
+\begin{itemize}
+	\item User \texttt{name}s are (supposed to be) unique.
+	\item Showings and shifts are identified by a unique \texttt{ID}.
+	\item The \texttt{showings} endpoint returns an array of arrays
+	      because it gives movie showings first by showing/shift ID
+	      and then by booth number.
+	      The individual movies should really also each have a showing time attached,
+	      but the rationale here was that this is actually a derived value to be calculated
+	      from the order and duration of the movies along with the opening times of \textsc{LocalCinema} .
+\end{itemize}
+
+\section*{Implementation}
+
+The MVP can be tried out at this link:
+\begin{center}
+	\url{https://frlis21.github.io/OnlineVagtplan/}
+\end{center}
+There is only the frontend, there is no backend or API.
+Originally the plan was to pull data from an API
+but it was decided that just having a frontend
+would be easier on the examinators.
+Randomized test data is generated instead.
+
+No data is saved whatsoever,
+but the author claims that the frontend was purposefully designed
+to make the introduction of an API trivial
+with only some minor refactoring.
+
+\subsection*{Testing}
+
+As was maybe hinted from the UML diagrams from before,
+there are no concrete classes in our implementation of \textsc{OnlineVagtplan}.
+The framework used uses a component composition paradigm
+instead of an object-oriented,
+so we shall say components are equivalent to classes.
+
+Unfortunately, due to time constraints
+and \textsc{JavaScript} stupidity,
+all attempted testing frameworks refused to work properly.
+Only trivial tests could be implemented,
+so there is only one test in the whole codebase.
+The code coverage for our lonely little test can be found the
+\hyperref[appendix:coverage]{appendix}.
+
+As for cyclomatic complexity,
+the CLI tool \texttt{scc} was used
+which outputs a complexity estimate
+among other fun
+(albeit useless)
+bits of data.
+A quick scan through the source code
+reveals that \texttt{scc}'s complexity estimates
+are fairly accurate.
+
+\begin{center}
+	\label{cmd:scc}
+	\begin{verbatim}
+-------------------------------------------------------------------------------
+Language                 Files     Lines   Blanks  Comments     Code Complexity
+-------------------------------------------------------------------------------
+JSX                         10       601       41         2      558          5
+JavaScript                   3       162       13         6      143          7
+-------------------------------------------------------------------------------
+Total                       13       763       54         8      701         12
+-------------------------------------------------------------------------------
+Estimated Cost to Develop (organic) $18,603
+Estimated Schedule Effort (organic) 3.03 months
+Estimated People Required (organic) 0.55
+-------------------------------------------------------------------------------
+Processed 22015 bytes, 0.022 megabytes (SI)
+-------------------------------------------------------------------------------
+\end{verbatim}
+\end{center}
+
+Regarding the coverage results,
+it is unclear how one small test
+reaches so much of the codebase.
+According to the results,
+the pages components are understandably the least tested;
+only one page component is really being tested after all.
+Surprisingly, the store provider component sees good coverage
+despite the tested page not touching it very much.
+Overall, it could have been more interesting to get the testing framework to work,
+but alas.
+
+\section*{Documenting the architecture}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{C41}
+	\caption{C4 level 1 --- Context}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{C42.eps}
+	\caption{C4 level 2 --- Container}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{C43}
+	\caption{C4 level 3 --- Component}
+\end{figure}
+
+\begin{itemize}
+	\item \textbf{Layers} ---
+	      The architecture of the MVP is at comprised of at most 2 layers.
+	      The reactive framework used makes it easy to take advantage of the MVC model,
+	      but in our MVP we tightly coupled the model and controller for testing.
+	      The ultimate goal, however, was to have 3 layers,
+	      where the frontend makes API calls to a backend for the data to show.
+	\item \textbf{Distribution patterns} ---
+	      The MVP does not make use of Renzel's distribution patterns,
+	      but the final product could seem like it would use the
+	      \emph{remote user interface} pattern,
+	      where all of the presentation layer is packaged with the frontend
+	      which communicates with the backend over a REST API.
+
+	\item \textbf{Agile principles} ---
+	      Considering a group of 1 built the entire MVP,
+	      it is hard to say whether the process
+	      of designing and implementing the product
+	      lived up to Agile standards.
+	      Regarding the simplicity and ``technical excellence''
+	      points of the Agile principles,
+	      it is debatable whether the MVP lives up to them.
+	      The author believes the codebase is simple enough
+	      once you understand the fine-grained reactivity of the framework used,
+	      but the author also definitely neglected some parts of the code.
+\end{itemize}
+
+\section*{User Interface}
+
+A fairly nice user interface naturally followed
+from choosing a reactive frontend framework
+to implement \textsc{OnlineVagtplan} with.
+There are some visual inconsistencies,
+but this is merely because the author
+does not know all of the tricks to HTML and CSS yet.
+
+There are no screenshots in this report,
+but it is easy to try out the website for yourself!
+Again we provide the link to the website:
+\begin{center}
+	\url{https://frlis21.github.io/OnlineVagtplan/}
+\end{center}
+The idea behind the user interface,
+as with most user interfaces,
+was to create an intuitive interface with as few buttons as possible
+while still retaining as much functionality as possible.
+No particular design principles were followed,
+though the interface may have benefited from them.
+The interface is simply the product of the author's intuition
+of a simple user interface,
+along with some inspiration from
+\href{https://sourcehut.org/}{sr.ht}'s
+website.
+

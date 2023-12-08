@@ -1,0 +1,50 @@
+@startuml C41
+!include <C4/C4_Context>
+
+Person(volunteer, "Volunteer", "Volunteers at LocalCinema")
+Person(super, "Super", "Manages volunteers at LocalCinema")
+System(systemAlias, "OnlineVagtplan", "Website to sign up for shifts")
+
+Rel(volunteer, systemAlias, "Volunteer", "Website, app")
+Rel(super, systemAlias, "Manage", "Website, app")
+BiRel(super, volunteer, "Communication", "SMS, e-mail, GroupMe, etc.")
+@enduml
+
+@startuml C42
+!include <C4/C4_Container>
+
+Person(user, "User", "User of the website (volunteer or Super)")
+System_Boundary(c1, "OnlineVagtplan") {
+	Container(server, "Server", "NGINX or Apache or something", "Server serving up the website")
+	Container(frontend, "Frontend", "SolidJS", "The website users interact with")
+	Container(backend, "Fake Backend", "SolidJS Store", "A fake test backend with fake data")
+}
+
+Rel(user, frontend, "Interacts", "HTTP")
+Rel(server, frontend, "Serves", "HTTP")
+Rel(backend, frontend, "Supplies", "JavaScript")
+@enduml
+
+@startuml C43
+!include <C4/C4_Component>
+
+Container(frontend, "Frontend", "SolidJS", "The website users interact with")
+Container(backend, "Fake Backend", "SolidJS", "The backend supplying the frontend with data")
+Container_Boundary(c1, "Website") {
+	Component(portal, "Portal", "SolidJS Component", "Login and registration")
+	Component(shifts, "Shift List", "SolidJS Component", "Signing up for shifts")
+	Component(users, "User List", "SolidJS Component", "View other users and their shifts")
+
+	Component(store, "Store", "SolidJS Context", "The state store, used as a sort of database")
+	Component(data, "Data", "Random data", "Randomly generated data")
+}
+Rel(frontend, portal, "Composes")
+Rel(frontend, shifts, "Composes")
+Rel(frontend, users, "Composes")
+BiRel(frontend, backend, "Interact")
+Rel(backend, store, "Store")
+Rel(store, data, "Pulls from")
+Rel(store, portal, "Data for logins")
+Rel(store, shifts, "Shift and showing data")
+Rel(store, users, "User data")
+@enduml

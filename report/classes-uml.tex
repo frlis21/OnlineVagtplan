@@ -1,0 +1,67 @@
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\begin{class}{App}{3, 5}
+			\operation{showVolunteers()}
+			\operation{showShifts()}
+			\operation{showPortal()}
+		\end{class}
+
+		\begin{class}{Shifts}{0, 1}
+			\operation{listAvailableShifts(user : User)}
+		\end{class}
+
+		\begin{class}{Portal}{6, 1}
+			\operation{showLogin()}
+			\operation{showRegistration()}
+		\end{class}
+
+		\begin{class}{Store}{0, 9}
+			\attribute{user : String}
+
+			\operation{login()}
+			\operation{logout()}
+			\operation{register()}
+			\operation{takeShift()}
+			\operation{cancelShift()}
+		\end{class}
+
+		\begin{class}{Volunteers}{6, 9}
+			\operation{listVolunteers()}
+			\operation{listShifts(user : User)}
+		\end{class}
+
+		\begin{class}{User}{-3.5, 12}
+			\attribute{name : String}
+			\attribute{password : String}
+		\end{class}
+
+		\begin{class}{Showing}{3.5, 12}
+			\attribute{date : Date}
+		\end{class}
+
+		\begin{class}{Shift}{0, 16}
+			\attribute{date : Date}
+		\end{class}
+
+		\begin{class}{Movie}{6, 16}
+			\attribute{title : String}
+			\attribute{duration : Number}
+			\attribute{booth : Number}
+		\end{class}
+
+		\unidirectionalAssociation{User}{users}{0..*}{Store}
+		\unidirectionalAssociation{Showing}{showings}{0..*}{Store}
+		\composition{App}{shifts}{1}{Shifts}
+		\composition{App}{portal}{1}{Portal}
+		\unidirectionalAssociation{Store}{store}{1}{App}
+		\unidirectionalAssociation{Shift}{shifts}{0..*}{Store}
+		\composition{App}{volunteers}{1}{Volunteers}
+
+		\association{Showing}{movies}{1..*}{Movie}{1..*}{showing}
+		\association{User}{shift}{0..*}{Shift}{1}{user}
+		\association{Showing}{shift}{1}{Shift}{1}{showing}
+
+	\end{tikzpicture}
+	\caption{UML Diagram}
+\end{figure}
